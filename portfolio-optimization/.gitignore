@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Data and Notebook checkpoints
+data/
+.ipynb_checkpoints/
+*.csv
+*.xlsx
+
+# IDE Settings
+.DS_Store
+.venv
