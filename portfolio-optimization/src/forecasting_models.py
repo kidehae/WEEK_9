@@ -100,3 +100,19 @@ def build_and_train_lstm(X_train: np.ndarray, y_train: np.ndarray, epochs: int =
     print("\nTraining Deep Learning LSTM network...")
     model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verbose=1)
     return model
+
+def train_lstm_model(train_series: pd.Series, window_size: int = 60, epochs: int = 5, batch_size: int = 32):
+    """
+    Unified entry-point wrapper that prepares historical scaling sequences, 
+    instantiates structural dimensions, and trains the Deep LSTM Network.
+    """
+    # Create a dummy test series to satisfy your existing prepare_lstm_sequences signature
+    dummy_test = pd.Series([train_series.iloc[-1]], index=[train_series.index[-1] + pd.Timedelta(days=1)])
+    
+    # Extract structural 3D tensors and MinMaxScaler states cleanly
+    X_train, y_train, _, _, scaler = prepare_lstm_sequences(train_series, dummy_test, window_size=window_size)
+    
+    # Train and return the compiled Keras sequence model instance
+    model = build_and_train_lstm(X_train, y_train, epochs=epochs, batch_size=batch_size)
+    
+    return model, scaler
